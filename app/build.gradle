@@ -6,6 +6,7 @@ plugins {
     id 'dagger.hilt.android.plugin'
     id 'kotlin-kapt'
     id 'jacoco'
+    id "org.jlleitschuh.gradle.ktlint" version "11.0.0"
 }
 
 task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'createDebugCoverageReport']) {
@@ -69,6 +70,16 @@ android {
     }
     kotlinOptions {
         jvmTarget = '1.8'
+    }
+}
+
+ktlint{
+    android = true
+    ignoreFailures = false
+    reporters {
+        reporter "plain"
+        reporter "checkstyle"
+        reporter "sarif"
     }
 }
 
