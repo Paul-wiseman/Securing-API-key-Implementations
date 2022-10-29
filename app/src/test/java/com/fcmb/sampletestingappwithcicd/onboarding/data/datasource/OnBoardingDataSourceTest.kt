@@ -46,7 +46,7 @@ class OnBoardingDataSourceTest {
     }
 
     @Test
-    fun `verifyUserBvn throws an exception when response is 500 error state from the server`(): Unit =
+    fun `verifyUserBvn throws an exception when response is 500 error state`(): Unit =
         runBlocking {
             mockWebServer.enqueue(
                 MockResponse()
@@ -55,9 +55,12 @@ class OnBoardingDataSourceTest {
                     .throttleBody(1024, 1, TimeUnit.SECONDS)
             )
             val response = dataSource.verifyUserBvn("0918863837")
-            assertThat(response).isInstanceOf(Resource.Failure::class.java) // on failure an instance of [Resource.Failure] is returned
-            assertThat(response.message).isEqualTo("Error 500: Unable to connect to the server") // Failure message returned
-            assertThat(response.data).isEqualTo(null) // because an error is returned data is null
+            // on failure an instance of [Resource.Failure] is returned
+            assertThat(response).isInstanceOf(Resource.Failure::class.java)
+            // Failure message returned
+            assertThat(response.message).isEqualTo("Error 500: Unable to connect to the server")
+            // because an error is returned data is null
+            assertThat(response.data).isEqualTo(null)
         }
 
     @Test
@@ -79,8 +82,10 @@ class OnBoardingDataSourceTest {
             }
         }
         val result = dataSource.verifyUserBvn("0918863837")
-        assertThat(result).isInstanceOf(Resource.Success::class.java) // on success an instance of [Resource.Success] is returned
-        assertThat(result.message).isEqualTo(null) // because call to the backend is successful message will be null
+        // on success an instance of [Resource.Success] is returned
+        assertThat(result).isInstanceOf(Resource.Success::class.java)
+        // because call to the backend is successful message will be null
+        assertThat(result.message).isEqualTo(null)
         assertThat(result.data?.bvn).isEqualTo("28836993739")
         assertThat(result.data?.firstName).isEqualTo("Paul")
         assertThat(result.data?.lastName).isEqualTo("Nero")
