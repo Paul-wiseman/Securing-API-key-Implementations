@@ -1,14 +1,15 @@
 package com.fcmb.sampletestingappwithcicd.onboarding.data.datasource
 
+import com.fcmb.sampletestingappwithcicd.data.datasource.OnBoardingDataSource
+import com.fcmb.sampletestingappwithcicd.data.service.DummyOnBoardingService
 import com.fcmb.sampletestingappwithcicd.onboarding.data.datasource.Fake.contentType
 import com.fcmb.sampletestingappwithcicd.onboarding.data.datasource.Fake.getSampleJsonResponse
 import com.fcmb.sampletestingappwithcicd.onboarding.data.datasource.Fake.jsonConverter
 import com.fcmb.sampletestingappwithcicd.onboarding.data.datasource.Fake.okHttpClient
-import com.fcmb.sampletestingappwithcicd.data.datasource.OnBoardingDataSource
-import com.fcmb.sampletestingappwithcicd.data.service.DummyOnBoardingService
 import com.fcmb.sampletestingappwithcicd.responsewrapper.Resource
 import com.google.common.truth.Truth.assertThat
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
+import java.util.concurrent.TimeUnit
 import kotlinx.coroutines.runBlocking
 import kotlinx.serialization.ExperimentalSerializationApi
 import okhttp3.mockwebserver.Dispatcher
@@ -19,8 +20,6 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import retrofit2.Retrofit
-import java.util.concurrent.TimeUnit
-
 
 @OptIn(ExperimentalSerializationApi::class)
 class OnBoardingDataSourceTest {
@@ -28,7 +27,6 @@ class OnBoardingDataSourceTest {
     private lateinit var mockWebServer: MockWebServer
     private lateinit var webservice: DummyOnBoardingService
     private lateinit var dataSource: OnBoardingDataSource
-
 
     @Before
     fun setUp() {
@@ -88,4 +86,3 @@ class OnBoardingDataSourceTest {
         assertThat(result.data?.lastName).isEqualTo("Nero")
     }
 }
-

@@ -1,11 +1,10 @@
 package com.fcmb.sampletestingappwithcicd.onboarding.data.datasource
 
 import com.fcmb.sampletestingappwithcicd.data.models.UserModel
-import kotlinx.serialization.json.Json
 import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
-
 
 object Fake {
 
@@ -31,6 +30,5 @@ object Fake {
                 registeredAt = "3/2/2030"
             )
         )
-
     }
 }
