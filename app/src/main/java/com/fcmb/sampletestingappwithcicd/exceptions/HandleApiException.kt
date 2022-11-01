@@ -17,7 +17,8 @@ interface HandleApiException {
                 when (throwable) {
                     is HttpException -> {
                         // val errorMessage = getErrorApiError(throwable)
-                        Resource.Failure("Error ${throwable.code()}: Unable to connect to the server")
+                        Resource
+                            .Failure("Error ${throwable.code()}: Unable to connect to the server")
                     }
 
                     is NetworkErrorException -> {

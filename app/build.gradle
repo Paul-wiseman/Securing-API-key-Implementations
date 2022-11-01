@@ -46,13 +46,17 @@ android {
 
 
     testOptions {
+        animationsDisabled true
         unitTests.all {
             jacoco {
                 includeNoLocationClasses = true
                 excludes = ['jdk.internal.*']
             }
         }
-        unitTests.returnDefaultValues = true
+        unitTests{
+            includeAndroidResources = true
+        }
+//        unitTests.returnDefaultValues = true
     }
 
     buildTypes {
@@ -83,6 +87,9 @@ ktlint{
         reporter "checkstyle"
         reporter "sarif"
     }
+}
+jacoco{
+    toolVersion = "$jacocoVersion"
 }
 
 dependencies {
