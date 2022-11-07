@@ -30,8 +30,13 @@ task jacocoTestReport(type: JacocoReport, dependsOn: ['testDebugUnitTest', 'crea
 }
 
 
+def apikeyPropertiesFile = rootProject.file("apikey.properties")
+def apikeyProperties = new Properties()
+apikeyProperties.load(new FileInputStream(apikeyPropertiesFile))
 
 android {
+
+
     compileSdk 32
 
     defaultConfig {
@@ -42,6 +47,17 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        // should correspond to key/value pairs inside the file
+        buildConfigField("String", "CONSUMER_KEY", apikeyProperties['CONSUMER_KEY'])
+        buildConfigField("String", "CONSUMER_SECRET", apikeyProperties['CONSUMER_SECRET'])
+
+    }
+
+    externalNativeBuild{
+        ndkBuild {
+            path '/Users/tmoor/AndroidStudioProjects/SampleTestingAppwithCICD/app/src/main/java/com/fcmb/sampletestingappwithcicd/jni/Android.mk'//path of Android.mk file
+        }
     }
 
 
@@ -64,7 +80,9 @@ android {
             testCoverageEnabled true
         }
         release {
-            minifyEnabled false
+            minifyEnabled true   // Obfuscate and minify codes
+            shrinkResources true // Remove unused resources
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
