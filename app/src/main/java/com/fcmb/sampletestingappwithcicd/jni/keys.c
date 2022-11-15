@@ -6,6 +6,6 @@ Java_com_fcmb_sampletestingappwithcicd_MainActivity_getFacebookApiKey(JNIEnv *en
 }
 JNIEXPORT jstring JNICALL
 Java_com_fcmb_sampletestingappwithcicd_MainActivity_getBaseApi(JNIEnv *env, jobject instance) {
-    return (*env)->NewStringUTF(env, "ABCEFGHIJKL");
+    return (*env)->NewStringUTF(env, "ABCEFGHI123458765");
 }
 
